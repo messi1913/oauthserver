@@ -50,6 +50,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     public DefaultTokenServices tokenService() {
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setAccessTokenValiditySeconds(10);
+        defaultTokenServices.setRefreshTokenValiditySeconds(20);
         defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
     }
@@ -59,6 +61,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         endpoints.tokenStore(tokenStore())
                 .authenticationManager(authenticationManager)
                 .accessTokenConverter(jwtAccessTokenConverter());
+
+
     }
 
     @Bean
